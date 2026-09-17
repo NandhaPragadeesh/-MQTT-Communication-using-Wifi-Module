@@ -1,4 +1,4 @@
-# EXP 1(E) CLOUD-BASED DEVICE CONTROL USING MQTT AND WI-FI COMMUNICATION
+
 
 ## Aim
 
@@ -20,8 +20,10 @@ To control an electrical device remotely through a cloud platform using MQTT com
 
 # Circuit Diagram
 
+
 ---
-To upload
+<img width="663" height="400" alt="image" src="https://github.com/user-attachments/assets/4ccf1874-4349-4f21-9cf4-3b35a37b8219" />
+
 ---
 
 # Procedure
@@ -91,12 +93,41 @@ To upload
 7. Record the commands and corresponding device states.
 
 # Program
+```
+#define BLYNK_TEMPLATE_ID "YOUR_TEMPLATE_ID"
+#define BLYNK_TEMPLATE_NAME "YOUR_TEMPLATE_NAME"
+#define BLYNK_AUTH_TOKEN "YOUR_AUTH_TOKEN"
 
+#include <WiFiS3.h>
+#include <BlynkSimpleWifi.h>
 
+char ssid[] = "YOUR_WIFI_NAME";
+char pass[] = "YOUR_WIFI_PASSWORD";
 
-> **Note:** The above program is written for an **ESP32** using the `WiFi.h` library. Replace the Wi-Fi credentials, MQTT broker address, and MQTT topic with the values used in the laboratory setup.
+#define LED_PIN 8
 
+BLYNK_WRITE(V0)
+{
+  int value = param.asInt();
+  digitalWrite(LED_PIN, value);
+}
+
+void setup()
+{
+  pinMode(LED_PIN, OUTPUT);
+
+  Serial.begin(9600);
+
+  Blynk.begin(BLYNK_AUTH_TOKEN, ssid, pass);
+}
+
+void loop()
+{
+  Blynk.run();
+}
+```
 # Observation
+<img width="1600" height="719" alt="image" src="https://github.com/user-attachments/assets/9f83c27a-5469-4fbb-9709-8bd0feb0e286" />
 
 
 # Result
